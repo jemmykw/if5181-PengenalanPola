@@ -8,8 +8,11 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                <TextBlock Text="TODO: tambahkan kenarsisan Cakra, Jemmy, Vincent" />
-                <TextBlock Text="(ceritanya ini halaman about)" />
+                <TextBlock Text="Kelompok Pengenalan Pola IF5181:" />
+                <TextBlock Text="1. Cakra Adipura (23214244)" />
+                <TextBlock Text="2. Jemmy Kristianto Wiguno (23214339)" />
+                <TextBlock Text="3. Vincentius Timothy (23215114)" />
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>
