@@ -24,5 +24,38 @@ namespace UTS_PengenalanPola.Pages
         {
             InitializeComponent();
         }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new System.Windows.Forms.OpenFileDialog();
+            fileDialog.Filter = "Image Files (*.bmp, *.jpeg, *.jpg, *.png)|*.bmp;*.jpeg;*.jpg;*.png";
+            fileDialog.FilterIndex = 1;
+            var result = fileDialog.ShowDialog();
+            switch (result)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    var file = fileDialog.FileName;
+                    TxtFile.Text = file;
+                    TxtFile.ToolTip = file;
+                    break;
+                case System.Windows.Forms.DialogResult.Cancel:
+                default:
+                    TxtFile.Text = null;
+                    TxtFile.ToolTip = null;
+                    break;
+            }
+
+            // Open a Uri and decode a BMP image
+            Uri myUri = new Uri(fileDialog.FileName, UriKind.RelativeOrAbsolute);
+            BmpBitmapDecoder decoder2 = new BmpBitmapDecoder(myUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            BitmapSource bitmapSource2 = decoder2.Frames[0];
+
+            // Draw the Image
+            //Image myImage2 = new Image();
+            myImage2.Source = bitmapSource2;
+            myImage2.Stretch = Stretch.None;
+            myImage2.Margin = new Thickness(20);
+
+        }
     }
 }

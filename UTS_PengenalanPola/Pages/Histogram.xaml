@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Open"/>
-            <TextBlock Width="6"/>
-            <Button Content="Process"/>
+            <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"/>
+            <TextBlock x:Name="TxtFile" Width="6"/>
+            <Button x:Name="ProcessButton" Content="Process"/>
             <TextBlock Width="6"/>
             <Button Content="Other Button"/>
         </StackPanel>
@@ -32,6 +32,7 @@
                 <StackPanel>
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
                     <TextBlock Text="Content goes here" />
+                    <Image x:Name="myImage2"/>
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" />
