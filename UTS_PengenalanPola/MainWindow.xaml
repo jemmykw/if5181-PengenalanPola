@@ -7,7 +7,7 @@
         ContentSource="/Pages/Home.xaml">
 
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="IF5181 pengenalan pola">
+        <mui:LinkGroup DisplayName="if5181 pengenalan pola">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="about" Source="/Pages/Home.xaml" />
                 <mui:Link DisplayName="histogram" Source="/Pages/Histogram.xaml" />
