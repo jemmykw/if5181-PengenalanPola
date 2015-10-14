@@ -28,7 +28,7 @@ namespace UTS_PengenalanPola.Pages
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
             var fileDialog = new System.Windows.Forms.OpenFileDialog();
-            fileDialog.Filter = "Image Files (*.bmp, *.jpeg, *.jpg, *.png)|*.bmp;*.jpeg;*.jpg;*.png";
+            fileDialog.Filter = "Image Files (*.bmp)|*.bmp";
             fileDialog.FilterIndex = 1;
             var result = fileDialog.ShowDialog();
             switch (result)
@@ -44,6 +44,7 @@ namespace UTS_PengenalanPola.Pages
                     TxtFile.ToolTip = null;
                     break;
             }
+
 
             // Open a Uri and decode a BMP image
             Uri myUri = new Uri(fileDialog.FileName, UriKind.RelativeOrAbsolute);
