@@ -33,6 +33,7 @@
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
                     <TextBlock Text="Content goes here" />
                     <Image x:Name="myImage2"/>
+                    <Image x:Name="OriginalImage" Stretch="Fill"/>
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" />
@@ -40,6 +41,7 @@
                 <StackPanel>
                     <TextBlock Text="AFTER" Style="{StaticResource Heading2}" />
                     <TextBlock Text="Content goes here" />
+                    <Image x:Name="ModifiedImage" Stretch="Fill"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
