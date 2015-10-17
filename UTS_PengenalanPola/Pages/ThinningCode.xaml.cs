@@ -56,7 +56,7 @@ namespace UTS_PengenalanPola.Pages
 
             //codeEmgucv
             Image<Bgr, byte> My_Image = new Image<Bgr, byte>(fileDialog.FileName);
-            myImage2.Source = My_Image.ToBitmap();
+            //myImage2.Source = My_Image.ToBitmap();
             // Draw the Image
             //Image myImage2 = new Image();
             //myImage2.Source = bitmapSource2;
