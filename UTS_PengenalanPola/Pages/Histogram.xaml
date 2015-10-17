@@ -31,7 +31,7 @@
             <ScrollViewer Margin="{StaticResource SplitLeft}">
                 <StackPanel>
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
-                    <Image x:Name="OriginalImage" Stretch="Fill"/>
+                    <Image x:Name="OriginalImage" Stretch="Fill" Height="28"/>
                     <TextBlock x:Name="PixelData"/>
                     <TextBlock x:Name="OriginalPixel" />
                 </StackPanel>

@@ -14,11 +14,17 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Open"/>
-            <TextBlock Width="6"/>
+            <Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click"/>
+            <TextBlock Width="6" Height="26" VerticalAlignment="Top"/>
             <Button Content="Process"/>
             <TextBlock Width="6"/>
             <Button Content="Other Button"/>
+            
+        </StackPanel>
+        <StackPanel>
+            <Label Margin="10,0,0,0" Height="23" Name="Label1">
+                Current File:
+            </Label>
         </StackPanel>
 
         <Grid Grid.Row="0"  Style="{StaticResource ContentRoot}">
@@ -31,7 +37,8 @@
             <ScrollViewer Margin="{StaticResource SplitLeft}">
                 <StackPanel>
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
+                    <!-- <Image x:Name="OriginalImage" Stretch="Fill" Height="28"/> -->
+                    <Image Name="ImageViewer1" Height="400" Stretch="Fill" />
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" />
