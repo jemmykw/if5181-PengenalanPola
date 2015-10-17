@@ -31,15 +31,29 @@
             <ScrollViewer Margin="{StaticResource SplitLeft}">
                 <StackPanel>
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
-                    <Image x:Name="myImage2"/>
+                    <Image x:Name="OriginalImage" Stretch="Fill"/>
+                    <TextBlock x:Name="PixelData"/>
+                    <TextBlock x:Name="OriginalPixel" />
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" />
             <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
                 <StackPanel>
                     <TextBlock Text="AFTER" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
+                    <Image x:Name="ModifiedImage" Stretch="Fill"/>
+                    <Grid>
+                        <Polyline x:Name="AlphaHistogram" Stroke="White" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="RedHistogram" Stroke="Red" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="GreenHistogram" Stroke="Green" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="BlueHistogram" Stroke="Blue" Height="240" Margin="12,12,0,0"/>
+                    </Grid>
+                    <Grid>
+                        <Polyline x:Name="NewAlphaHistogram" Stroke="White" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="NewRedHistogram" Stroke="Red" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="NewGreenHistogram" Stroke="Green" Height="240" Margin="12,12,0,0"/>
+                        <Polyline x:Name="NewBlueHistogram" Stroke="Blue" Height="240" Margin="12,12,0,0"/>
+                    </Grid>
+                    <TextBlock x:Name="ModifiedPixel" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
