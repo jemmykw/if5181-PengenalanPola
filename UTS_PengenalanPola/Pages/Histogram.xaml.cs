@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Emgu.CV;
 
 namespace UTS_PengenalanPola.Pages
 {
@@ -50,6 +51,8 @@ namespace UTS_PengenalanPola.Pages
             Uri myUri = new Uri(fileDialog.FileName, UriKind.RelativeOrAbsolute);
             BmpBitmapDecoder decoder2 = new BmpBitmapDecoder(myUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             BitmapSource bitmapSource2 = decoder2.Frames[0];
+
+            //codeEmgucv
 
             // Draw the Image
             //Image myImage2 = new Image();
