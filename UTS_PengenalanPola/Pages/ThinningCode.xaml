@@ -45,7 +45,7 @@
             <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
                 <StackPanel>
                     <TextBlock Text="AFTER" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
+                    <Image Name="ImageViewer2" Height="400" Stretch="Fill" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
