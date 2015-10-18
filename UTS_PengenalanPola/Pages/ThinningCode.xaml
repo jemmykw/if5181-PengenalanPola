@@ -32,15 +32,16 @@
             <ScrollViewer Margin="{StaticResource SplitLeft}">
                 <StackPanel>
                     <TextBlock Text="BEFORE" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
-                    <Image x:Name="myImage2"/>
+                    <TextBlock Text="Sebelum Thinning Algorithm" />
+                    <Image x:Name="OriginalImage"/>
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" />
             <ScrollViewer Grid.Column="2 " Margin="{StaticResource SplitRight}">
                 <StackPanel>
                     <TextBlock Text="AFTER" Style="{StaticResource Heading2}" />
-                    <TextBlock Text="Content goes here" />
+                    <TextBlock Text="Setelah Thinning Algorithm" />
+                    <Image x:Name="ModifiedImage"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
