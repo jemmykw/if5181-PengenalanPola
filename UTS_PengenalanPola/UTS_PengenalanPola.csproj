@@ -123,6 +123,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Pages\BGRAarray.cs" />
     <Compile Include="Pages\ChainCode.xaml.cs">
       <DependentUpon>ChainCode.xaml</DependentUpon>
     </Compile>
