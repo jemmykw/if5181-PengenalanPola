@@ -92,6 +92,7 @@
     <Compile Include="Pages\Histogram.xaml.cs">
       <DependentUpon>Histogram.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IThinningCode.cs" />
     <Compile Include="Pages\KodeBelok.xaml.cs">
       <DependentUpon>KodeBelok.xaml</DependentUpon>
     </Compile>
@@ -124,8 +125,15 @@
     <Compile Include="Pages\ThinningCode.xaml.cs">
       <DependentUpon>ThinningCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ThinningCodeZhangSuen.xaml.cs">
+      <DependentUpon>ThinningCodeZhangSuen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="Pages\ThinningCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ThinningCodeZhangSuen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,26 +10,24 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Interop;
-using System.IO;
 
 namespace UTS_PengenalanPola.Pages
 {
     /// <summary>
-    /// Interaction logic for ThinningCode.xaml
+    /// Interaction logic for ThinningCodeZhangSuen.xaml
     /// </summary>
-    public partial class ThinningCode : UserControl
+    public partial class ThinningCodeZhangSuen : System.Windows.Controls.UserControl
     {
-        public ThinningCode()
+        public ThinningCodeZhangSuen()
         {
             InitializeComponent();
         }
-
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
@@ -38,31 +36,30 @@ namespace UTS_PengenalanPola.Pages
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
+            var result = op.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
                 ImageViewer1.Source = new BitmapImage(new Uri(op.FileName));
-                String file = op.FileName ;
+                String file = op.FileName;
                 //BitmapImage v = new BitmapImage(new Uri(op.FileName));
                 //double d = v.Width;
                 bool[][] t = ImageCheckToBool(file);
                 t = ZhangSuenThinning(t);
-                Bool2Image(t);
-
-                ImageViewer2.Source = Bitmap2BitmapImage(Bool2Image(t));
+                //ImageViewer2.Source = ToBitmapImage(null);
 
 
                 //Bool2Image(t);
 
-                
+
             }
         }
 
-        private ImageSource Bitmap2BitmapImage(System.Drawing.Image image)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
-        //public static Bitmap ToBitmapImage(this Bitmap bitmap)
+        //public BitmapImage ToBitmapImage(this Bitmap bitmap)//cause error cs1106 :extention must be defined a non generic static class
         //{
         //    using (var memory = new MemoryStream())
         //    {
@@ -78,24 +75,44 @@ namespace UTS_PengenalanPola.Pages
         //        return bitmapImage;
         //    }
         //}
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
-        private BitmapSource Bitmap2BitmapImage(Bitmap bitmap)
+        public static bool[][] ZhangSuenThinning(bool[][] s)
         {
-            IntPtr hBitmap = bitmap.GetHbitmap();
-            BitmapSource retval;
-
-            try
+            bool[][] temp = ArrayClone(s);  // make a deep copy to start.. 
+            int count = 0;
+            do  // the missing iteration
             {
-                retval = Imaging.CreateBitmapSourceFromHBitmap(hBitmap,IntPtr.Zero,Int32Rect.Empty,BitmapSizeOptions.FromEmptyOptions());
+                count = step(1, temp, s);
+                temp = ArrayClone(s);      // ..and on each..
+                count += step(2, temp, s);
+                temp = ArrayClone(s);      // ..call!
             }
-            finally
-            {
-                DeleteObject(hBitmap);
-            }
+            while (count > 0);
 
-            return retval;
-        }
+            return s;
+        }//endmethod
+        public static T[][] ArrayClone<T>(T[][] A)
+        {
+            return A.Select(a => a.ToArray()).ToArray();
+        }//end method
+
+        static int step(int stepNo, bool[][] temp, bool[][] s)
+        {
+            int count = 0;
+
+            for (int a = 1; a < temp.Length - 1; a++)
+            {
+                for (int b = 1; b < temp[0].Length - 1; b++)
+                {
+                    if (SuenThinningAlg(a, b, temp, stepNo == 2))
+                    {
+                        // still changes happening?
+                        if (s[a][b]) count++;
+                        s[a][b] = false;
+                    }
+                }
+            }
+            return count;
+        }//end method
 
         public static bool[][] ImageCheckToBool(string filename)
         {
@@ -135,29 +152,7 @@ namespace UTS_PengenalanPola.Pages
 
             return s;
         }
-
-        public static System.Drawing.Image Bool2Image(bool[][] s)
-        {
-            if (s == null || s.Length == 0) return null;
-            
-
-            Bitmap bmp = new Bitmap(s[0].Length, s.Length);
-            using (Graphics g = Graphics.FromImage(bmp)) g.Clear(System.Drawing.Color.White);
-            for (int y = 0; y < bmp.Height; y++)
-            {
-                for (int x = 0; x < bmp.Width; x++)
-                {
-                    if (s[y][x])
-                    {
-                        bmp.SetPixel(x, y, System.Drawing.Color.Black);
-                    }
-                }
-            }
-           
-            return bmp;
-
-        }//endmethod
-
+        //end method
         public static float[] RGBtoHSB(int r, int g, int b, float[] hsbvals)// Menganti warna rgb ke HSB (Hue Saturation Brightness)
         {
             float hue, saturation, brightness;
@@ -210,47 +205,8 @@ namespace UTS_PengenalanPola.Pages
             hsbvals[2] = brightness;
 
             return hsbvals;
-        }//endmethod
-
-        public static T[][] ArrayClone<T>(T[][] A)
-        {
-            return A.Select(a => a.ToArray()).ToArray();
-        }//endmethod
-
-        public static bool[][] ZhangSuenThinning(bool[][] s)
-        {
-            bool[][] temp = ArrayClone(s);  // make a deep copy to start.. 
-            int count = 0;
-            do  // the missing iteration
-            {
-                count = step(1, temp, s);
-                temp = ArrayClone(s);      // ..and on each..
-                count += step(2, temp, s);
-                temp = ArrayClone(s);      // ..call!
-            }
-            while (count > 0);
-
-            return s;
-        }//endmethod
-
-        static int step(int stepNo, bool[][] temp, bool[][] s)
-        {
-            int count = 0;
-
-            for (int a = 1; a < temp.Length - 1; a++)
-            {
-                for (int b = 1; b < temp[0].Length - 1; b++)
-                {
-                    if (SuenThinningAlg(a, b, temp, stepNo == 2))
-                    {
-                        // still changes happening?
-                        if (s[a][b]) count++;
-                        s[a][b] = false;
-                    }
-                }
-            }
-            return count;
-        }//endmethod
+        }
+        //end method
 
         static bool SuenThinningAlg(int x, int y, bool[][] s, bool even)
         {
@@ -292,7 +248,7 @@ namespace UTS_PengenalanPola.Pages
                 }
             }
             return false;
-        }
+        }//end method
 
         static int NumberOfZeroToOneTransitionFromP9(int x, int y, bool[][] s)
         {
@@ -328,10 +284,5 @@ namespace UTS_PengenalanPola.Pages
             return count;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
     }
 }
